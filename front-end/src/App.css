@@ -1,0 +1,111 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.html {
+  width: 100vw;
+  min-height: 1280px;  
+
+  background-image: url('./assets/Hero-Background-notecode.svg'),
+  linear-gradient(to bottom right, rgba(183, 135, 245, 1), rgba(116, 62, 228, 1));;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: top;
+
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  font-family: "Outfit", sans-serif;
+  color: #121826;
+  font-size: 16px;
+}
+
+.logo {
+  width: 120px;
+  height: 60px;
+
+  margin: 40px 0;
+}
+
+.subtitle-top {
+  font-size: 2rem;
+  font-weight: 600;
+
+  margin-bottom: 10px;
+}
+
+.subtitle-bottom {
+  font-size: 2.5rem;
+  font-weight: 600;
+
+  margin-bottom: 50px;
+}
+
+.container {
+  border: 1px solid lightgray;
+  border-radius: 10px;
+
+  padding: 15px 1px;
+  padding-bottom: 15px;
+
+  background-color: #FFFFFE;
+}
+
+.container-bottom {
+  width: 100%;
+  height: 80px;
+
+  padding: 0 15px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+}
+
+.share-button {
+  background-color: #406AFF;
+  
+  font-size: 1rem;
+  color: #FFFFFE;
+  font-weight: 600;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  border-radius: 20px;
+}
+
+.share-image {
+
+}
+
+.config-select {
+  display: flex;
+  gap: 20px;
+}
+
+.select {
+  width: 100px;
+  height: 30px;
+
+  color: #364153;
+  font-size: 1rem;
+  font-weight: 600;
+
+  background-color: #CED6E1;
+
+  border: 0px;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-radius: 15px;
+
+  text-align: center;
+}
