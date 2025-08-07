@@ -29,11 +29,11 @@ app.use(express.static('dist'))
 app.use(express.json())
 app.use(middleware.requestLogger)
 
-app.get('/api/health', (req, res) => {
+app.get('/health', (req, res) => {
     res.json({ status: 'ok', timestamp: new Date().toISOString() })
 })
 
-app.use('/api/snippets', snippetsRouter)
+app.use('/snippets', snippetsRouter)
 
 app.use(middleware.unknownEndpoint)
 app.use(middleware.errorHandler)
