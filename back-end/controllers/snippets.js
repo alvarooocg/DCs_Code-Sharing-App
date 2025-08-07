@@ -1,7 +1,5 @@
-const middleware = require('../utils/middleware')
 const snippetsRouter = require('express').Router()
 const Snippet = require('../models/snippet')
-const next = require('next')
 
 snippetsRouter.get('/', async (request, response, next) => {
     try {
