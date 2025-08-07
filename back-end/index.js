@@ -1,4 +1,5 @@
 const app = require('./app')
+const serverless = require('serverless-http')
 const config = require('./utils/config')
 const logger = require('./utils/logger')
 
@@ -10,4 +11,4 @@ if (process.env.NODE_ENV !== 'production') {
     })
 }
 
-module.exports = app
+module.exports = serverless(app)
