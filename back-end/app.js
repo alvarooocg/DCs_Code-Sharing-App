@@ -20,12 +20,19 @@ mongoose.connect(mongoUrl)
         logger.error('Error connecting to MongoDB:', err.message)
     )
 
-app.use(cors())
+app.use(cors({
+    origin: process.env.FRONTEND_URL || '*',
+    credentials: true
+}))
 app.use(express.static('dist'))
 app.use(express.json())
 app.use(middleware.requestLogger)
 
-app.use('/', snippetsRouter)
+app.get('/api/health', (req, res) => {
+    res.json({ status: 'ok', timestamp: new Date().toISOString() })
+})
+
+app.use('/api/snippets', snippetsRouter)
 
 app.use(middleware.unknownEndpoint)
 app.use(middleware.errorHandler)

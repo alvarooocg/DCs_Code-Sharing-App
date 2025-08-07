@@ -3,8 +3,12 @@ const snippetsRouter = require('express').Router()
 const Snippet = require('../models/snippet')
 
 snippetsRouter.get('/', async (request, response) => {
-    const snippets = await Snippet.find({})
-    response.json(snippets)
+    try {
+        const snippets = await Snippet.find({})
+        response.json(snippets)
+    } catch(error) {
+        next(error)
+    }
 })
 
 snippetsRouter.get('/:id', (request, response, next) => {
@@ -17,18 +21,23 @@ snippetsRouter.get('/:id', (request, response, next) => {
 })
 
 snippetsRouter.post('/', async (request, response, next) => {
-    const body = request.body
+    try {
+        const body = request.body
 
-    const snippet = new Snippet({
-        id: body.code,
-        code: body.code
-    })
+        if (!body.code) {
+            return response.status(400).json({ error: 'Code mising' })
+        }
 
-    if (!body.code) {
-        return response.status(400).json({ error: 'Code mising' })
+        const snippet = new Snippet({
+            id: body.code,
+            code: body.code
+        })
+
+        const newSnippet = await snippet.save()
+        response.status(201).json(newSnippet)
+    } catch (error) {
+        next(error)
     }
-
-    const newSnippet = await snippet.save()
 })
 
 module.exports = snippetsRouter
