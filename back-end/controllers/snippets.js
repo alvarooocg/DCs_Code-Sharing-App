@@ -1,7 +1,7 @@
 const snippetsRouter = require('express').Router()
 const Snippet = require('../models/snippet')
 
-snippetsRouter.get('/', async (request, response, next) => {
+snippetsRouter.get('/', async (request, response) => {
     try {
         const snippets = await Snippet.find({})
         response.json(snippets)
