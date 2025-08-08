@@ -1,7 +1,6 @@
 const config = require('./utils/config')
 const express = require('express')
 const app = express()
-const serverless = require('serverless-http')
 const cors = require('cors')
 const snippetsRouter = require('./controllers/snippets')
 const middleware = require('./utils/middleware')
@@ -33,9 +32,13 @@ app.get('/health', (req, res) => {
     res.json({ status: 'ok', timestamp: new Date().toISOString() })
 })
 
-app.use('/snippets', snippetsRouter)
+app.get('/api/health', (req, res) => {
+    res.json({ status: 'ok', timestamp: new Date().toISOString() })
+})
+
+app.use('/api/snippets', snippetsRouter)
 
 app.use(middleware.unknownEndpoint)
 app.use(middleware.errorHandler)
 
-module.exports = serverless(app)
+module.exports = app
