@@ -28,6 +28,28 @@ app.use(express.static('dist'))
 app.use(express.json())
 app.use(middleware.requestLogger)
 
+app.get('/', (req, res) => {
+    res.json({ 
+        message: 'Snippet API Server',
+        status: 'running',
+        endpoints: {
+            health: '/api/health',
+            snippets: '/api/snippets'
+        },
+        timestamp: new Date().toISOString()
+    })
+})
+
+app.get('/api', (req, res) => {
+    res.json({ 
+        message: 'Snippet API',
+        endpoints: {
+            health: '/api/health',
+            snippets: '/api/snippets'
+        }
+    })
+})
+
 app.get('/health', (req, res) => {
     res.json({ status: 'ok', timestamp: new Date().toISOString() })
 })
