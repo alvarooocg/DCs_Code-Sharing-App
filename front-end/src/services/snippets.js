@@ -1,5 +1,6 @@
 import axios from 'axios'
-const baseUrl = process.env.API_URL
+const baseUrl = import.meta.env.VITE_API_URL
+console.log(import.meta.env.VITE_API_URL)
 
 const getById = (id) => {
     const request = axios.get(`${baseUrl}/${id}`)
