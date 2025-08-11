@@ -11,8 +11,9 @@ import ShareBtn from './assets/Share.svg'
 
 import Editor from '@monaco-editor/react'
 
-function SnippetEditor() {
+function App() {
   const { id } = useParams()
+  const [newId, setNewId] = useState('')
   const [language, setLanguage] = useState('html')
   const [theme, setTheme] = useState('light')
   const [shared, setShared] = useState(false)
@@ -24,21 +25,24 @@ function SnippetEditor() {
       snippetServices.getById(id).then(snippet => {
         setCode(snippet.code)
       })
+    } else {
+      setCode('')
     }
   }, [id])
 
   const containerBg = theme === 'light' ? '#FFFFFE' : '#1e1e1e'
   const shareBg = shared === false ? '#406AFF' : '#CED6E1'
 
-  const shareSnippet = () => {
+  const shareSnippet = async () => {
     setShared(true)
+    const generatedId = uuidv4()
+    setNewId(generatedId)
     const newSnippet = {
-      id: uuidv4(),
+      id: generatedId,
       code: code
     }
-    snippetServices.create(newSnippet).then((created) => {
-      navigate(`/${created.id}`)
-    })
+    await snippetServices.create(newSnippet)
+    navigate(`/${generatedId}`)
   }
 
   return (
@@ -57,6 +61,7 @@ function SnippetEditor() {
           width='50vw'
           language={language}
           theme={theme}
+          value={code}
           defaultValue='<html>
   <head>
     <title>HTML Sample</title>
@@ -103,23 +108,14 @@ function SnippetEditor() {
           </div>
 
           <button onClick={() => { shareSnippet() }} className='share-button'
-            style={{ backgroundColor: shareBg }}
-            ><img src={ShareBtn} className='share-image'/>Share</button>
+            style={{ backgroundColor: shareBg }}>
+              <img src={ShareBtn} className='share-image'/>
+            Share
+          </button>
         </div>
 
       </div>
     </div>
-  )
-}
-
-function App() {
-  return (
-    <Router>
-      <Routes>
-        <Route path='/:id' element={<SnippetEditor />} />
-        <Route path='/' element={<SnippetEditor />} />
-      </Routes>
-    </Router>
   )
 }
 

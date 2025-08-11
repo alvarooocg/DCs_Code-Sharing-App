@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = 'https://code-share-app-back-end.vercel.app/api/snippets'
+const baseUrl = '/api/snippets'
 
 const getSnippet = (id) => {
     const request = axios.get(`${baseUrl}/${id}`)
