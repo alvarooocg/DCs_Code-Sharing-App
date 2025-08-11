@@ -21,6 +21,7 @@ function App() {
   const [code, setCode] = useState('')
   const [originalCode, setOriginalCode] = useState('')
   const [isExistingSnippet, setIsExistingSnippet] = useState(false)
+  const [showCopy, setShowCopy] = useState(false)]
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -40,6 +41,7 @@ function App() {
       setCode('')
       setOriginalCode('')
       setShared(false)
+      setShowCopy(false)
     }
   }, [id])
 
@@ -58,6 +60,7 @@ function App() {
         await snippetServices.update(id, { code: code })
         setOriginalCode(code)
         setShared(true)
+        setShowCopy(true)
       } else {
         const generatedId = uuidv4()
         setNewId(generatedId)
@@ -66,6 +69,7 @@ function App() {
           code: code
         }
         await snippetServices.create(newSnippet)
+        setShowCopy(true)
         navigate(`/${generatedId}`)
       }
     } catch (error) {
@@ -145,6 +149,7 @@ function App() {
           <div className='bottom-right-container'>
             <button onClick={ copyUrl() }
               className='copy-button'
+              style={{ display: showCopy ? 'flex' : 'none' }}
             >
               <img src={LinkBtn} className='copy-image' />
               {`.../${id}`}

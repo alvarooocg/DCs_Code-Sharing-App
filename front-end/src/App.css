@@ -108,7 +108,7 @@
 
 .copy-button {
   background: transparent;
-  display: flex;
+  display: none;
   justify-content: start;
   align-items: center;
   gap: 10px;
