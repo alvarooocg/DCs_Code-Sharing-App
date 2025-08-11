@@ -21,7 +21,7 @@ function App() {
   const [code, setCode] = useState('')
   const [originalCode, setOriginalCode] = useState('')
   const [isExistingSnippet, setIsExistingSnippet] = useState(false)
-  const [showCopy, setShowCopy] = useState(false)]
+  const [showCopy, setShowCopy] = useState(false)
   const navigate = useNavigate()
 
   useEffect(() => {
