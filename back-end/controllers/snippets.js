@@ -64,3 +64,18 @@ snippetsRouter.put('/:id', async (request, response, next) => {
 })
 
 module.exports = snippetsRouter
+
+const app = require('../app') // Ajusta la ruta según tu estructura
+
+module.exports = (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', 'https://d-cs-code-sharing-app.vercel.app')
+  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS')
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+
+  if (req.method === 'OPTIONS') {
+    res.status(200).end()
+    return
+  }
+
+  app(req, res)
+}

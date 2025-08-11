@@ -1,4 +1,5 @@
 const app = require('./app')
+/*
 const config = require('./utils/config')
 const logger = require('./utils/logger')
 
@@ -9,5 +10,6 @@ if (process.env.NODE_ENV !== 'production') {
         logger.info(`Server running on port ${PORT}`)
     })
 }
+*/
 
 module.exports = app
