@@ -1,8 +1,15 @@
 const mongoose = require('mongoose')
 
 const snippetSchema = new mongoose.Schema({
-    id: String,
-    code: String
+    customId: {
+        type: String, 
+        required: true,
+        unique: true
+    },
+    code: {
+        type: String,
+        required: true
+    }
 })
 
 snippetSchema.set('toJSON', {
