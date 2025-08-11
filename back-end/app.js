@@ -20,20 +20,21 @@ mongoose.connect(mongoUrl)
         logger.error('Error connecting to MongoDB:', err.message)
     )
 
+// CORS configurado correctamente para Vercel
 app.use(cors({
     origin: [
-        process.env.FRONTEND_URL,
+        'https://d-cs-code-sharing-app.vercel.app',
         'http://localhost:5173'
     ],
-    credentials: true
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+    credentials: true,
+    optionsSuccessStatus: 200
 }))
+
 app.use(express.static('dist'))
 app.use(express.json())
 app.use(middleware.requestLogger)
-
-app.get('/api/health', (req, res) => {
-    res.json({ status: 'ok', timestamp: new Date().toISOString() })
-})
 
 app.use('/api/snippets', snippetsRouter)
 
