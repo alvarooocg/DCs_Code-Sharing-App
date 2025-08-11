@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = process.env.API_URL || 'http://localhost:3001/api/snippets'
+const baseUrl = process.env.API_URL
 
 const getById = (id) => {
     const request = axios.get(`${baseUrl}/${id}`)
